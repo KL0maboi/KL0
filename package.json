@@ -1,0 +1,26 @@
+{
+    "name": "kl0",
+    "module": "index.ts",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "bun --watch run index.ts",
+        "start": "bun run index.ts",
+        "build": "bun build ./index.ts --outdir ./dist --minify",
+        "lint": "eslint .",
+        "prettier": "bunx prettier --write .",
+        "reg": "bun run ./src/lib/registerCommands.ts"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/bun": "latest",
+        "eslint": "^10.13.0",
+        "globals": "^17.13.0",
+        "jiti": "^2.7.0",
+        "typescript-eslint": "^8.72.0"
+    },
+    "dependencies": {
+        "discord.js": "^14.27.0",
+        "typescript": "~6.0.3"
+    }
+}
