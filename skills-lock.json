@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "skills": {
+        "discord-js-official-docs": {
+            "source": "adamalex/discordjs-pi",
+            "sourceType": "github",
+            "skillPath": ".agents/skills/discord-js-official-docs/SKILL.md",
+            "computedHash": "ab6a7418d08ecf6b3460ec7935a9dc0e7e7c701f1159d2912034004781618348"
+        },
+        "drizzle": {
+            "source": "lobehub/lobehub",
+            "sourceType": "github",
+            "skillPath": ".agents/skills/drizzle/SKILL.md",
+            "computedHash": "a51a3da4e421ae171d1b3aea0953cd63241b48a5f2fff59ad7ed0f6ff6d9a459"
+        }
+    }
+}
