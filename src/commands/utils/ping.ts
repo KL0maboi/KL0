@@ -25,4 +25,4 @@ export default {
             flags: [MessageFlags.Ephemeral],
         });
     },
-} as KCommand<'chatInput'>;
+} satisfies KCommand<'chatInput'>;

@@ -12,6 +12,8 @@ import type {
     ClientEvents,
     ContextMenuCommandBuilder,
     ContextMenuCommandInteraction,
+    SlashCommandOptionsOnlyBuilder,
+    SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 
 class KClient<Ready extends boolean> extends Client<Ready> {
@@ -55,13 +57,15 @@ class KClient<Ready extends boolean> extends Client<Ready> {
 
     async loadCommands() {
         const path = join(__dirname, '../commands');
-        const categories = readdirSync(path);
+        const categories = readdirSync(path, { withFileTypes: true })
+            .filter((dirent) => dirent.isDirectory())
+            .map((dirent) => dirent.name);
 
         for (const category of categories) {
             const dirPath = join(path, category);
-            const commands = readdirSync(dirPath);
+            const commandFiles = readdirSync(dirPath);
 
-            for (const command of commands) {
+            for (const command of commandFiles) {
                 const cmdPath = join(dirPath, command);
                 const cmdData: KCommand<keyof KCommandTypes> = (
                     await import(cmdPath)
@@ -90,9 +94,14 @@ export type KEvent<Event extends keyof ClientEvents> = {
     ) => Promise<void> | void;
 };
 
+export type KSlashCommandBuilder =
+    | SlashCommandBuilder
+    | SlashCommandSubcommandsOnlyBuilder
+    | SlashCommandOptionsOnlyBuilder;
+
 interface KCommandTypes {
     chatInput: {
-        data: SlashCommandBuilder;
+        data: KSlashCommandBuilder;
         interaction: ChatInputCommandInteraction;
     };
 
@@ -102,11 +111,16 @@ interface KCommandTypes {
     };
 
     both: {
-        data: [SlashCommandBuilder, ContextMenuCommandBuilder];
+        data: [KSlashCommandBuilder, ContextMenuCommandBuilder];
         interaction:
-            | ChatInputCommandInteraction
-            | ContextMenuCommandInteraction;
+            ChatInputCommandInteraction | ContextMenuCommandInteraction;
     };
+}
+
+export enum KCommandCooldownLevels {
+    User = 'user', // only for that specific user
+    Server = 'server', // globally on whole server
+    None = 'none', // no cooldown
 }
 
 export type KCommand<T extends keyof KCommandTypes> = {
@@ -123,6 +137,9 @@ export type KCommand<T extends keyof KCommandTypes> = {
     ): void | Promise<void>;
 
     dev?: boolean;
+    restricted?: boolean;
+    cooldownMs?: number;
+    cooldownLevel?: KCommandCooldownLevels;
 };
 
 export default KClient;

@@ -3,9 +3,8 @@ import {
     ContextMenuCommandBuilder,
     REST,
     Routes,
-    SlashCommandBuilder,
 } from 'discord.js';
-import KClient from './KClient';
+import KClient, { type KSlashCommandBuilder } from './KClient';
 
 const TOKEN = process.env.TOKEN || '';
 
@@ -16,7 +15,7 @@ client.once('clientReady', async () => {
 
     const body = new Collection<
         string,
-        SlashCommandBuilder | ContextMenuCommandBuilder
+        KSlashCommandBuilder | ContextMenuCommandBuilder
     >();
 
     try {
