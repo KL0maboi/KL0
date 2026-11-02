@@ -1,6 +1,8 @@
 services:
     web:
         build: .
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         ports:
             - '${PORT}:9000'
         restart: on-failure
