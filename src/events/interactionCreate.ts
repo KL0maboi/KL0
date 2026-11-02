@@ -150,7 +150,7 @@ export default {
                                 (command.cooldownMs - elapsed) / 1000,
                             );
                             await interaction.reply({
-                                content: `Please wait ${timeLeft} second(s) before reusing the \`/${interaction.commandName}\` command.`,
+                                content: `Please wait ${timeLeft} second(s) before reusing the </${interaction.commandName}:${interaction.commandId}> command.`,
                                 flags: MessageFlags.Ephemeral,
                             });
                             return;
