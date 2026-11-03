@@ -65,7 +65,10 @@ export async function changeNameGod(client: KClient<true>) {
 
     await db
         .update(nameGodTable)
-        .set({ count: sql`${nameGodTable.count} + 1` })
+        .set({
+            count: sql`${nameGodTable.count} + 1`,
+            lastNameGodAt: sql`NOW()`,
+        })
         .where(eq(nameGodTable.userId, selected.user.id));
 
     const [channelData] = await db
