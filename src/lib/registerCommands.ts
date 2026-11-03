@@ -33,15 +33,15 @@ client.once('clientReady', async () => {
             }
         }
 
-        const GUILD_ID = process.env.GUILD_ID;
+        // const GUILD_ID = process.env.GUILD_ID;
 
-        if (GUILD_ID)
-            await rest.put(
-                Routes.applicationGuildCommands(client.user.id, GUILD_ID),
-                {
-                    body: [...body.values()],
-                },
-            );
+        // if (GUILD_ID)
+        //     await rest.put(
+        //         Routes.applicationGuildCommands(client.user.id, GUILD_ID),
+        //         {
+        //             body: [...body.values()],
+        //         },
+        //     );
 
         await rest.put(Routes.applicationCommands(client.user.id), {
             body: [...body.values()],

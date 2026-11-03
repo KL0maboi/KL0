@@ -104,6 +104,7 @@ KL0/
 | **Deploy Commands**  | `bun run reg`       | Registers slash commands with Discord API           |
 | **Push DB Schema**   | `bun run db:push`   | Pushes Drizzle schema directly to PostgreSQL        |
 | **Drizzle Studio**   | `bun run db:studio` | Opens interactive web UI for database inspection    |
+| **Type Checking**    | `bunx tsc --noEmit` | Runs TypeScript compiler type-check                |
 | **Linting**          | `bun run lint`      | Runs ESLint across the codebase                     |
 | **Formatting**       | `bun run prettier`  | Formats files using Prettier                        |
 
@@ -126,4 +127,5 @@ The project expects the following environment variables:
 2. **Commands Organization**: Place any new command under an appropriate category folder in `src/commands/<category>/<command_name>.ts`.
 3. **Database Schemas**: Add modular tables and enums into `src/db/schemas/` and export them in `src/db/schema.ts`.
 4. **Dynamic File Discovery**: Do not rely on hardcoded lists of commands, events, or schema files. Inspect the filesystem dynamically when discovering or working with them.
-5. **TypeScript**: Keep strict typing intact; avoid `any`. Ensure `bun x tsc --noEmit` and `bun run lint` pass.
+5. **TypeScript**: Keep strict typing intact; avoid `any`. Ensure `bunx tsc --noEmit` and `bun run lint` pass.
+6. **Package Execution**: Always use `bunx` (single word, NEVER `bun x`) when running CLI tools or package binaries (e.g., `bunx tsc --noEmit`).
